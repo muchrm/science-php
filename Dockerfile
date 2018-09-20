@@ -14,7 +14,9 @@ RUN docker-php-ext-configure gd \
 
 RUN	docker-php-ext-install gd \
                     pdo_mysql \
-                    zip
+                    zip \
+                    opcache
+
 RUN apk add --no-cache --virtual .build-deps \
         autoconf \
 		g++ \
@@ -32,6 +34,6 @@ RUN apk add --no-cache --virtual .build-deps \
     && pecl install mongodb \
     && docker-php-ext-enable mongodb \
     && apk del .build-deps
-    
+COPY ./opcache.ini /usr/local/etc/php/conf.d/opcache.ini    
 ADD ./php.ini /usr/local/etc/php/conf.d
 ADD ./www.conf /usr/local/etc/php-fpm.d/www.conf
