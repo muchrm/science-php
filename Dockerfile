@@ -35,8 +35,6 @@ RUN apk add --no-cache --virtual .build-deps \
     && docker-php-ext-enable mongodb \
     && apk del .build-deps
 
-RUN docker-php-ext-install pcntl
-
 ADD ./opcache.ini /usr/local/etc/php/conf.d/  
 ADD ./php.ini /usr/local/etc/php/conf.d
 ADD ./www.conf /usr/local/etc/php-fpm.d/www.conf
